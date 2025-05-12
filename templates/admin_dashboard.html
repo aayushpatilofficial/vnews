@@ -1,36 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard - V Network Regd</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f9f9f9;
+        }
+        .container {
+            margin-top: 40px;
+        }
+        .form-section {
+            margin-bottom: 40px;
+        }
+        iframe {
+            width: 100%;
+            height: 315px;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="mb-4 text-center">Admin Dashboard - V Network Regd</h2>
 
-{% extends "base.html" %}
-{% block title %}Admin Dashboard - Citrine World{% endblock %}
-{% block content %}
-<div class="admin-container">
-    <h2>Admin Dashboard</h2>
-
-    <form method="POST" action="{{ url_for('add_mineral') }}" class="admin-form">
-        <h3>Add New Mineral</h3>
-        <input type="text" name="name" placeholder="Mineral Name" required>
-        <textarea name="description" placeholder="Description" rows="4" required></textarea>
-        <input type="text" name="image" placeholder="Image filename (e.g., citrine.jpg)" required>
-        <button type="submit">Add Mineral</button>
-    </form>
-
-    <div class="minerals-list">
-        <h3>Existing Minerals</h3>
-        <div class="grid">
-            {% for mineral in minerals %}
-            <div class="card">
-                <img src="{{ url_for('static', filename='images/' + mineral.image) }}" alt="{{ mineral.name }}">
-                <div class="card-content">
-                    <h3>{{ mineral.name }}</h3>
-                    <p>{{ mineral.description }}</p>
-
-                    <!-- Delete Mineral Button -->
-                    <form method="POST" action="{{ url_for('delete_mineral', mineral_id=mineral.id) }}">
-                        <button type="submit" class="delete-button">Delete</button>
-                    </form>
-                </div>
+        <!-- Upload News Video -->
+        <div class="card form-section">
+            <div class="card-header">Upload News Video</div>
+            <div class="card-body">
+                <form action="/admin/add_video" method="POST">
+                    <div class="form-group">
+                        <label for="title">Video Title:</label>
+                        <input type="text" name="title" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="url">YouTube URL:</label>
+                        <input type="text" name="url" class="form-control" placeholder="https://www.youtube.com/watch?v=VIDEO_ID" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Upload Video</button>
+                </form>
             </div>
-            {% endfor %}
+        </div>
+
+        <!-- Existing Videos -->
+        <div class="form-section">
+            <h4 class="mb-3">Uploaded News Videos</h4>
+            <div class="row">
+                {% for video in videos %}
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ video.title }}</h5>
+                            <iframe src="{{ video.url | replace('watch?v=', 'embed/') }}" allowfullscreen></iframe>
+                            <form action="/admin/delete_video/{{ video.id }}" method="POST" class="mt-2">
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Logout -->
+        <div class="text-center mt-5">
+            <a href="/logout" class="btn btn-secondary">Logout</a>
         </div>
     </div>
-</div>
-{% endblock %}
+</body>
+</html>

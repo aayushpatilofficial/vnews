@@ -8,25 +8,25 @@ app.secret_key = 'your_secret_key_here'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
 
-class Mineral(db.Model):
+# NewsVideo model (ONLY this will be used now)
+class NewsVideo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100))
-    description = db.Column(db.Text)
-    image = db.Column(db.String(100))
+    title = db.Column(db.String(150))
+    url = db.Column(db.String(200))  # YouTube link (watch or embed)
 
 @app.route('/')
 def home():
-    minerals = Mineral.query.all()
-    return render_template('index.html', minerals=minerals)
+    videos = NewsVideo.query.all()
+    return render_template('index.html', videos=videos)
 
 @app.route('/about')
 def about():
     return render_template('about.html')
 
-@app.route('/minerals')
-def minerals():
-    minerals = Mineral.query.all()
-    return render_template('minerals.html', minerals=minerals)
+@app.route('/news')
+def news():
+    videos = NewsVideo.query.all()
+    return render_template('news.html', videos=videos)
 
 @app.route('/contact')
 def contact():
@@ -46,27 +46,26 @@ def admin_login():
 def admin_dashboard():
     if not session.get('admin'):
         return redirect(url_for('admin_login'))
-    minerals = Mineral.query.all()
-    return render_template('admin_dashboard.html', minerals=minerals)
+    videos = NewsVideo.query.all()
+    return render_template('admin_dashboard.html', videos=videos)
 
-@app.route('/admin/add', methods=['POST'])
-def add_mineral():
+@app.route('/admin/add_video', methods=['POST'])
+def add_video():
     if not session.get('admin'):
         return redirect(url_for('admin_login'))
-    name = request.form['name']
-    description = request.form['description']
-    image = request.form['image']
-    new_mineral = Mineral(name=name, description=description, image=image)
-    db.session.add(new_mineral)
+    title = request.form['title']
+    url = request.form['url']
+    new_video = NewsVideo(title=title, url=url)
+    db.session.add(new_video)
     db.session.commit()
     return redirect(url_for('admin_dashboard'))
 
-@app.route('/admin/delete/<int:mineral_id>', methods=['POST'])
-def delete_mineral(mineral_id):
+@app.route('/admin/delete_video/<int:video_id>', methods=['POST'])
+def delete_video(video_id):
     if not session.get('admin'):
         return redirect(url_for('admin_login'))
-    mineral = Mineral.query.get_or_404(mineral_id)
-    db.session.delete(mineral)
+    video = NewsVideo.query.get_or_404(video_id)
+    db.session.delete(video)
     db.session.commit()
     return redirect(url_for('admin_dashboard'))
 
