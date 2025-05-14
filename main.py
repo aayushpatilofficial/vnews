@@ -32,6 +32,10 @@ def news():
 def contact():
     return render_template('contact.html')
 
+@app.route('/articles')
+def articles():
+    return render_template('articles.html', articles=[])
+
 @app.route('/admin', methods=['GET', 'POST'])
 def admin_login():
     if request.method == 'POST':
