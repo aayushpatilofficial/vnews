@@ -1,3 +1,4 @@
+
 {% extends "base.html" %}
 {% block content %}
 <div class="hero-section">
@@ -5,18 +6,19 @@
     <p class="hero-text">Your Trusted Partner in Global Mineral Trade</p>
     <div class="hero-cta">
 
-
+        
  </div>
 </div>
 
 <div class="grid">
-    {% for video in videos %}
+    {% for mineral in minerals %}
     <div class="card">
+        <img src="{{ url_for('static', filename='images/' + mineral.image) }}" alt="{{ mineral.name }}">
         <div class="card-content">
-            <h3>{{ video.title }}</h3>
-            <iframe src="{{ video.url | replace('watch?v=', 'embed/') }}" allowfullscreen></iframe>
+            <h3>{{ mineral.name }}</h3>
+            <p>{{ mineral.description }}</p>
         </div>
     </div>
-{% endfor %}
+    {% endfor %}
 </div>
 {% endblock %}
