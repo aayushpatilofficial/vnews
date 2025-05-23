@@ -21,6 +21,8 @@ alt="v network" style="height: 70px;">
             <a href="{{ url_for('news') }}">NEWS</a>
             <a href="{{ url_for('articles') }}">Articles</a>
             <a href="{{ url_for('contact') }}">Contact</a>
+            <a href="{{ url_for('privacy') }}">Privacy policy</a>
+            <a href="{{ url_for('disclaimer') }}">Disclaimer</a>
             {% if session.get('admin') %}
             <a href="{{ url_for('admin_dashboard') }}">Dashboard</a>
             <a href="{{ url_for('logout') }}">Logout</a>

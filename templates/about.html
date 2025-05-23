@@ -1,32 +1,82 @@
 {% extends "base.html" %}
+
 {% block content %}
+<style>
+    .about-section {
+        text-align: center;
+        padding: 40px 20px;
+        background-color: #f8f9fa;
+    }
+
+    .about-section h1 {
+        font-size: 36px;
+        margin-bottom: 10px;
+        color: #333;
+    }
+
+    .about-gallery {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 30px;
+    }
+
+    .about-gallery img {
+        width: 300px;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .about-gallery img:hover {
+        transform: scale(1.05);
+    }
+
+    .about-description {
+        max-width: 700px;
+        margin: 0 auto;
+        font-size: 16px;
+        color: #555;
+        line-height: 1.6;
+    }
+</style>
+
 <div class="about-section">
-    <h2>About V NETWORK REGD</h2>
-    <div class="company-intro">
-        <p>Welcome to V Network REGD – Your Trusted Partner in Local News.</p>
-    </div>
+    <h1>About Us</h1>
+    <p class="about-description">
+        V Network was established in 2001 as North Karnataka’s first news, documentary, and ad film-making company.
+        The motto of V Network has always been to bring hidden urban talents to light and to provide coverage of ongoing events while exploring the natural wonders of the region.
+        V Network gained popularity during the era of tape cassettes and CDs, and has continued to thrive in the digital media age. It has produced numerous informative stories across North Karnataka.Here's a glimpse into our journey and milestones captured in photos.
+    </p>
 
-    <div class="about-grid">
-        <div class="about-card">
-            <h3>Our Social Media Handles</h3>
-            <ul>
-                <li>Construction</li>
-                <li>Metallurgy</li>
-                <li>Ceramics</li>
-                <li>Energy</li>
-            </ul>
-        </div>
-
-        <!-- Embedded YouTube Video -->
-        <div class="about-card">
-            <h3>Watch Our Video</h3>
-            <div class="video-container">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/iB1NR2fDIss"
-                    title="YouTube video player" frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen></iframe>
-            </div>
-        </div>
+    <div class="about-gallery">
+        <img src=https://imagizer.imageshack.com/img923/4820/u5L6pB.jpg" alt="Establishment 1">
+        <img src="https://imagizer.imageshack.com/img922/5601/H9Q6qS.jpg" alt="Establishment 2">
+        <img src="https://imagizer.imageshack.com/img923/1672/DsiwKB.jpg" alt="Establishment 3">
+        <img src="https://imagizer.imageshack.com/img923/7586/y7ahXU.jpg" alt="Establishment 4">
+        <img src="https://imagizer.imageshack.com/img924/2729/GwOfVr.jpg" alt="Establishment 5">
+        <img src="https://imagizer.imageshack.com/img922/1301/zh2kWa.jpg" alt="Establishment 6">
+        <img src="https://imagizer.imageshack.com/img923/4070/jVzqeW.jpg" alt="Establishment 7">
+        <img src="https://imagizer.imageshack.com/img923/3926/HrVxbp.jpg" alt="Establishment 8">
+        <img src="https://imagizer.imageshack.com/img923/1196/inFfQp.jpg" alt="Establishment 9">
+         <img src="https://imagizer.imageshack.com/img923/1622/d5hsMt.jpg" alt="Establishment 10">
+         <img src="https://imagizer.imageshack.com/img923/7219/DwuxXW.jpg" alt="Establishment 11">
+         <img src="https://imagizer.imageshack.com/img922/1428/sxJCN6.jpg" alt="Establishment 12">
+         <img src="https://imagizer.imageshack.com/img923/4215/EGLgdZ.jpg" alt="Establishment 13">
+         <img src="https://imagizer.imageshack.com/img923/9406/2rEinv.jpg" alt="Establishment 14">
+         <img src="https://imagizer.imageshack.com/img923/695/6cZsny.jpg" alt="Establishment 15">
+         <img src="https://imagizer.imageshack.com/img922/1848/alotu3.jpg" alt="Establishment 16">
+         <img src="https://imagizer.imageshack.com/img922/4971/2tScC4.jpg" alt="Establishment 17">
+         <img src="https://imagizer.imageshack.com/img923/4971/ry18Bu.jpg" alt="Establishment 18">
+         <img src="https://imagizer.imageshack.com/img923/8505/lOmDHb.jpg" alt="Establishment 19">
+         <img src="https://imagizer.imageshack.com/img923/7460/I1pFOO.jpg" alt="Establishment 20">
+         <img src="https://imagizer.imageshack.com/img923/9483/mtCe0r.jpg" alt="Establishment 21">
+         <img src="https://imagizer.imageshack.com/img922/7490/ra4YmH.jpg" alt="Establishment 22">
+       
+        
     </div>
 </div>
 {% endblock %}
