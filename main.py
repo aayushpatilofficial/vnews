@@ -117,8 +117,9 @@ def logout():
     session.pop('admin', None)
     return redirect(url_for('home'))
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     with app.app_context():
+        from models import db  # Import your db object from wherever you defined it
         db.create_all()
-        print("created")
-    app.run(host='0.0.0.0', port=5000)
+
