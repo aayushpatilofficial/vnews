@@ -6,7 +6,7 @@ app = Flask(__name__)
 app.secret_key = 'your_secret_key_here'
 
 # PostgreSQL Database Setup
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL")
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://aaaa_wpxk_user:elTL77uYi2hzQADlPEm74H8Z8hYV3ABI@dpg-d0pj4cuuk2gs739n8e60-a.oregon-postgres.render.com/aaaa_wpxk'
 db = SQLAlchemy(app)
 
 # NewsVideo model
