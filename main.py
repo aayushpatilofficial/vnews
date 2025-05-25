@@ -1,11 +1,12 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from flask_sqlalchemy import SQLAlchemy
+import os
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key_here'
 
-# Database Setup
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+# PostgreSQL Database Setup
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL")
 db = SQLAlchemy(app)
 
 # NewsVideo model
@@ -44,17 +45,13 @@ def articles():
 def contact():
     return render_template('contact.html')
 
-
 @app.route('/privacy policy')
 def privacy():
     return render_template('privacy.html')
 
-
 @app.route('/disclaimer')
 def disclaimer():
-        return render_template('disclaimer.html')
-
-
+    return render_template('disclaimer.html')
 
 @app.route('/admin', methods=['GET', 'POST'])
 def admin_login():
