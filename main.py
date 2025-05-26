@@ -119,7 +119,9 @@ def logout():
 
 
 if __name__ == "__main__":
+    from models import db  # Change this if your db is in another file
     with app.app_context():
-        from models import db  # Import your db object from wherever you defined it
-        db.create_all()
+        db.create_all()  # This will create the missing tables
+
+    app.run(debug=True)
 
