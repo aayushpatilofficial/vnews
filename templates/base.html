@@ -1,11 +1,21 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <!-- Force desktop layout on all devices -->
     <meta name="viewport" content="width=1024">
-    <meta name="description" content="your trusted news partner">
+    <meta name="description" content="Your trusted news partner">
     <title>{% block title %}V network{% endblock %}</title>
+
+    <!-- Open Graph Meta Tags for WhatsApp and social sharing -->
+    <meta property="og:title" content="V Network – Trusted News Partner in North Karnataka" />
+    <meta property="og:description" content="Explore documentaries, news, and talent stories with V Network, established in 2001." />
+    <meta property="og:image" content="https://imagizer.imageshack.com/v2/320xq70/r/924/QAYOSJ.jpg" />
+    <meta property="og:url" content="https://vnetworkregd.onrender.com/" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Fonts and styles -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}">
