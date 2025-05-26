@@ -1,30 +1,35 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from flask_sqlalchemy import SQLAlchemy
-import os
+from datetime import datetime
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key_here'
 
 # PostgreSQL Database Setup
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://aaaa_wpxk_user:elTL77uYi2hzQADlPEm74H8Z8hYV3ABI@dpg-d0pj4cuuk2gs739n8e60-a.oregon-postgres.render.com/aaaa_wpxk'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
 db = SQLAlchemy(app)
 
-# NewsVideo model
+# ---------------- MODELS ----------------
 class NewsVideo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(150))
-    url = db.Column(db.String(200))  # YouTube link
+    title = db.Column(db.String(150), nullable=False)
+    url = db.Column(db.String(300), nullable=False)
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
 
-# Article model
 class Article(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(150))
-    description = db.Column(db.Text)
+    title = db.Column(db.String(150), nullable=False)
+    description = db.Column(db.Text, nullable=False)
     image_url = db.Column(db.String(300))
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+
+# ---------------- ROUTES ----------------
 
 @app.route('/')
 def home():
-    videos = NewsVideo.query.all()
+    videos = NewsVideo.query.order_by(NewsVideo.timestamp.desc()).all()
     return render_template('index.html', videos=videos)
 
 @app.route('/about')
@@ -33,12 +38,12 @@ def about():
 
 @app.route('/news')
 def news():
-    videos = NewsVideo.query.all()
+    videos = NewsVideo.query.order_by(NewsVideo.timestamp.desc()).all()
     return render_template('news.html', videos=videos)
 
 @app.route('/articles')
 def articles():
-    articles = Article.query.all()
+    articles = Article.query.order_by(Article.timestamp.desc()).all()
     return render_template('articles.html', articles=articles)
 
 @app.route('/contact')
@@ -67,8 +72,8 @@ def admin_login():
 def admin_dashboard():
     if not session.get('admin'):
         return redirect(url_for('admin_login'))
-    videos = NewsVideo.query.all()
-    articles = Article.query.all()
+    videos = NewsVideo.query.order_by(NewsVideo.timestamp.desc()).all()
+    articles = Article.query.order_by(Article.timestamp.desc()).all()
     return render_template('admin_dashboard.html', videos=videos, articles=articles)
 
 @app.route('/admin/add_video', methods=['POST'])
@@ -117,11 +122,11 @@ def logout():
     session.pop('admin', None)
     return redirect(url_for('home'))
 
+# ---------------- MAIN ----------------
 
 if __name__ == "__main__":
-    from models import db  # Change this if your db is in another file
     with app.app_context():
-        db.create_all()  # This will create the missing tables
-
+        db.create_all()
     app.run(debug=True)
+
 
