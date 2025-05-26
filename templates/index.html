@@ -2,13 +2,16 @@
 {% block content %}
 <div class="hero-section">
     <h2>Welcome to V network</h2>
-    <p class="hero-text"> V Network was established in 2001 as North Karnataka’s first news, documentary, and ad film-making company.
-    The motto of V Network has always been to bring hidden urban talents to light and to provide coverage of ongoing events while exploring the natural wonders of the region.
-    V Network gained popularity during the era of tape cassettes and CDs, and has continued to thrive in the digital media age. It has produced numerous informative stories across North Karnataka.</p>
+    <p class="hero-text">
+        V Network was established in 2001 as North Karnataka’s first news, documentary, and ad film-making company.
+        The motto of V Network has always been to bring hidden urban talents to light and to provide coverage of ongoing events while exploring the natural wonders of the region.
+        V Network gained popularity during the era of tape cassettes and CDs, and has continued to thrive in the digital media age. It has produced numerous informative stories across North Karnataka.
+    </p>
     <div class="hero-cta">
-
-
- </div>
+        <a href="https://youtube.com/@vnetworkregd1826?si=-BqiRGiXHr0BiHKl" target="_blank" class="youtube-button">
+            📺 Visit our YouTube Channel
+        </a>
+    </div>
 </div>
 
 <div class="grid">
@@ -19,6 +22,6 @@
             <iframe src="{{ video.url | replace('watch?v=', 'embed/') }}" allowfullscreen></iframe>
         </div>
     </div>
-{% endfor %}
+    {% endfor %}
 </div>
 {% endblock %}
