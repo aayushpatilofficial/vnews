@@ -318,3 +318,16 @@ body.dark-mode footer,
 body.dark-mode small {
   color: #888; /* subdued text */
 }
+
+body.dark-mode .subscribe-button,
+body.dark-mode .subscribe-button * {
+  color: white !important;              /* Make button text white */
+  background-color: #ff0000 !important; /* YouTube red or a bright red */
+  border-color: #ff0000 !important;
+  box-shadow: none !important;
+}
+
+body.dark-mode .subscriber-count {
+  color: #eee !important;               /* Light text for subscriber count */
+}
+
