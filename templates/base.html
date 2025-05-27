@@ -7,19 +7,28 @@
     <meta name="description" content="Your trusted news partner">
     <title>{% block title %}V network{% endblock %}</title>
 
-    <!-- Open Graph Meta Tags for WhatsApp and social sharing -->
+    <!-- ✅ Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FF1FG5MJKY"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-FF1FG5MJKY');
+    </script>
+
+    <!-- ✅ Open Graph Meta Tags -->
     <meta property="og:title" content="V Network – Trusted News Partner in North Karnataka" />
     <meta property="og:description" content="Explore documentaries, news, and talent stories with V Network, established in 2001." />
-    <meta property="og:image" content="https://imagizer.imageshack.com/img924/9378/pHCKQ3.png" />
+    <meta property="og:image" content="https://imagizer.imageshack.com/v2/240x212q70/c/r/924/pHCKQ3.png" />
     <meta property="og:url" content="https://vnetworkregd.onrender.com/" />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
 
-    <!-- Fonts and styles -->
+    <!-- ✅ Fonts and Styles -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
-    <!-- ✅ Updated Favicon -->
+    <!-- ✅ Favicon -->
     <link rel="icon" type="image/png" href="https://imagizer.imageshack.com/v2/240x212q70/c/r/924/pHCKQ3.png">
 
     <style>
@@ -75,6 +84,18 @@
         img[alt="v network"] {
             max-height: 70px;
         }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .social-icons a img {
+            width: 50px;
+            height: 50px;
+        }
     </style>
 </head>
 <body>
@@ -97,6 +118,17 @@
                 <a href="{{ url_for('admin_login') }}">Admin</a>
             {% endif %}
         </nav>
+        <div class="social-icons">
+            <a href="https://facebook.com/share/1G7jZPTuty" target="_blank">
+                <img src="https://imagizer.imageshack.com/img923/5426/zDhOyv.png" alt="Facebook">
+            </a>
+            <a href="https://instagram.com/vnewsnetwork?igsh=aHg0bHF0ZDd2MjI4" target="_blank">
+                <img src="https://imagizer.imageshack.com/img924/8207/gVHkYb.png" alt="Instagram">
+            </a>
+            <a href="https://youtube.com/@vnetworkregd1826?si=-BqiRGiXHr0BiHKl" target="_blank">
+                <img src="https://imagizer.imageshack.com/img922/7529/SLiHjx.jpg" alt="YouTube">
+            </a>
+        </div>
     </header>
 
     <main>
@@ -108,3 +140,4 @@
     </footer>
 </body>
 </html>
+
