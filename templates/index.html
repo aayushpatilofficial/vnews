@@ -21,34 +21,115 @@
     </div>
 </div>
 
-<!-- 🎯 Live YouTube Subscriber Counter -->
-<div id="subscriber-box" style="padding: 20px; background: #fff; border-radius: 15px; box-shadow: 0 0 20px rgba(255,0,0,0.3); max-width: 300px; margin: 20px auto; text-align: center; font-family: Arial, sans-serif;">
-    <img src="https://www.iconpacks.net/icons/2/free-youtube-logo-icon-2431-thumb.png" alt="YouTube" style="width: 40px; height: 40px; margin-bottom: 10px;">
-    <div id="subscriber-count" style="font-size: 24px; font-weight: bold; color: #ff0000;">
-        Subscribers: Loading...
-    </div>
+<!-- 🎯 YouTube Subscriber Counter Card -->
+<style>
+  .subscriber-card {
+    max-width: 360px;
+    margin: 40px auto;
+    padding: 25px 30px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 30px rgba(255, 0, 0, 0.3);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    text-align: center;
+    font-family: 'Segoe UI', sans-serif;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .subscriber-card img {
+    width: 48px;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+  }
+
+  .subscriber-card img:hover {
+    transform: scale(1.1) rotate(3deg);
+  }
+
+  .subscriber-card h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #ff4c4c;
+    font-weight: 500;
+    margin-bottom: 5px;
+  }
+
+  .subscriber-count {
+    font-size: 32px;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 15px;
+  }
+
+  .subscribe-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #fff;
+    background: #ff0000;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 0, 0, 0.4);
+  }
+
+  .subscribe-btn:hover {
+    background: #cc0000;
+  }
+
+  body {
+    background: linear-gradient(to bottom right, #121212, #1e1e1e);
+  }
+</style>
+
+<div class="subscriber-card">
+  <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube Logo" />
+  <h3>V Network YouTube Subscribers</h3>
+  <div class="subscriber-count" id="subscriber-count">Loading...</div>
+  <a class="subscribe-btn" href="https://www.youtube.com/@vnetworkregd1826?sub_confirmation=1" target="_blank">
+    Subscribe Now
+  </a>
 </div>
 
 <script>
-    const apiKey = "AIzaSyBUDWEQnr4jmRX00TYHwwibujDIy8LTdcc";
-    const channelId = "UCgeFN61OQTU3GZKL6qLsKkg";
+  const apiKey = "AIzaSyBUDWEQnr4jmRX00TYHwwibujDIy8LTdcc";
+  const channelId = "UCgeFN61OQTU3GZKL6qLsKkg";
 
-    async function fetchSubscriberCount() {
-        try {
-            const response = await fetch(
-                `https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${channelId}&key=${apiKey}`
-            );
-            const data = await response.json();
-            const count = data.items[0].statistics.subscriberCount;
-            document.getElementById("subscriber-count").innerText = `Subscribers: ${count}`;
-        } catch (error) {
-            console.error("Failed to fetch subscriber count:", error);
-            document.getElementById("subscriber-count").innerText = "Subscribers: Error";
-        }
+  async function fetchSubscriberCount() {
+    try {
+      const response = await fetch(
+        `https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${channelId}&key=${apiKey}`
+      );
+      const data = await response.json();
+      const count = parseInt(data.items[0].statistics.subscriberCount);
+      animateCountUp(count);
+    } catch (error) {
+      console.error("Failed to fetch subscriber count:", error);
+      document.getElementById("subscriber-count").innerText = "Subscribers: Error";
     }
+  }
 
-    fetchSubscriberCount();
-    setInterval(fetchSubscriberCount, 30000);
+  function animateCountUp(count) {
+    const display = document.getElementById("subscriber-count");
+    let current = 0;
+    const increment = Math.ceil(count / 100);
+    const interval = setInterval(() => {
+      current += increment;
+      if (current >= count) {
+        display.textContent = count.toLocaleString();
+        clearInterval(interval);
+      } else {
+        display.textContent = current.toLocaleString();
+      }
+    }, 20);
+  }
+
+  fetchSubscriberCount();
+  setInterval(fetchSubscriberCount, 60000); // update every 60 seconds
 </script>
 
 <!-- 🎥 Video Grid Section -->
