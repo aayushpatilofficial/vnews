@@ -1,41 +1,52 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="hero-section">
-    <h2>Welcome to V Network</h2>
-
-    <div class="hero-cta social-icons">
-        <!-- Facebook -->
-        <a href="https://www.facebook.com/share/1G7jZPTuty/" target="_blank" aria-label="Facebook">
-            <img src="https://imagizer.imageshack.com/img923/5426/zDhOyv.png" alt="Facebook" class="social-icon">
-        </a>
-
-        <!-- Instagram -->
-        <a href="https://www.instagram.com/vnewsnetwork?igsh=aHg0bHF0ZDd2MjI4" target="_blank" aria-label="Instagram">
-            <img src="https://imagizer.imageshack.com/img922/7529/SLiHjx.jpg" alt="Instagram" class="social-icon">
-        </a>
-
-        <!-- YouTube -->
-        <a href="https://youtube.com/@vnetworkregd1826?si=-BqiRGiXHr0BiHKl" target="_blank" aria-label="YouTube">
-            <img src="https://imagizer.imageshack.com/img924/8207/gVHkYb.png" alt="YouTube" class="social-icon">
-        </a>
-    </div>
-</div>
-
-<!-- 🎯 YouTube Subscriber Counter Card -->
 <style>
+  body {
+    background: #ffffff;
+    color: #000;
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  .hero-section {
+    text-align: center;
+    padding: 40px 20px;
+  }
+
+  .hero-section h2 {
+    font-size: 32px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  .social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 10px;
+  }
+
+  .social-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+
+  .social-icon:hover {
+    transform: scale(1.1);
+  }
+
+  /* YouTube Subscriber Card */
   .subscriber-card {
     max-width: 360px;
     margin: 40px auto;
     padding: 25px 30px;
-    border-radius: 20px;
-    background: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 8px 30px rgba(255, 0, 0, 0.3);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    border-radius: 12px;
+    background: #f9f9f9;
     text-align: center;
-    font-family: 'Segoe UI', sans-serif;
-    color: #fff;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid #ddd;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
   }
 
   .subscriber-card img {
@@ -51,15 +62,13 @@
   .subscriber-card h3 {
     margin: 0;
     font-size: 18px;
-    color: #ff4c4c;
-    font-weight: 500;
+    color: #e40000;
     margin-bottom: 5px;
   }
 
   .subscriber-count {
     font-size: 32px;
     font-weight: bold;
-    color: #fff;
     margin-bottom: 15px;
   }
 
@@ -74,18 +83,68 @@
     border-radius: 8px;
     text-decoration: none;
     transition: background 0.3s ease;
-    box-shadow: 0 4px 15px rgba(255, 0, 0, 0.4);
+    box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
   }
 
   .subscribe-btn:hover {
     background: #cc0000;
   }
 
-  body {
-    background: linear-gradient(to bottom right, #121212, #1e1e1e);
+  /* Video Grid */
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 30px 20px;
+  }
+
+  .card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    width: 300px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.07);
+    overflow: hidden;
+  }
+
+  .card-content {
+    padding: 15px;
+  }
+
+  .card h3 {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+
+  iframe {
+    width: 100%;
+    height: 170px;
+    border: none;
   }
 </style>
 
+<!-- Hero Section -->
+<div class="hero-section">
+  <h2>Welcome to V Network</h2>
+  <div class="hero-cta social-icons">
+    <!-- Facebook -->
+    <a href="https://www.facebook.com/share/1G7jZPTuty/" target="_blank" aria-label="Facebook">
+      <img src="https://imagizer.imageshack.com/img923/5426/zDhOyv.png" alt="Facebook" class="social-icon">
+    </a>
+    <!-- Instagram -->
+    <a href="https://www.instagram.com/vnewsnetwork?igsh=aHg0bHF0ZDd2MjI4" target="_blank" aria-label="Instagram">
+      <img src="https://imagizer.imageshack.com/img922/7529/SLiHjx.jpg" alt="Instagram" class="social-icon">
+    </a>
+    <!-- YouTube -->
+    <a href="https://youtube.com/@vnetworkregd1826?sub_confirmation=1" target="_blank" aria-label="YouTube">
+      <img src="https://imagizer.imageshack.com/img924/8207/gVHkYb.png" alt="YouTube" class="social-icon">
+    </a>
+  </div>
+</div>
+
+<!-- YouTube Subscriber Section -->
 <div class="subscriber-card">
   <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube Logo" />
   <h3>V Network YouTube Subscribers</h3>
@@ -95,6 +154,7 @@
   </a>
 </div>
 
+<!-- JS: Fetch YouTube Subscriber Count -->
 <script>
   const apiKey = "AIzaSyBUDWEQnr4jmRX00TYHwwibujDIy8LTdcc";
   const channelId = "UCgeFN61OQTU3GZKL6qLsKkg";
@@ -129,18 +189,18 @@
   }
 
   fetchSubscriberCount();
-  setInterval(fetchSubscriberCount, 60000); // update every 60 seconds
+  setInterval(fetchSubscriberCount, 60000);
 </script>
 
-<!-- 🎥 Video Grid Section -->
+<!-- Video Grid -->
 <div class="grid">
-    {% for video in videos %}
-    <div class="card">
-        <div class="card-content">
-            <h3>{{ video.title }}</h3>
-            <iframe src="{{ video.url | replace('watch?v=', 'embed/') }}" allowfullscreen></iframe>
-        </div>
+  {% for video in videos %}
+  <div class="card">
+    <div class="card-content">
+      <h3>{{ video.title }}</h3>
+      <iframe src="{{ video.url | replace('watch?v=', 'embed/') }}" allowfullscreen></iframe>
     </div>
-    {% endfor %}
+  </div>
+  {% endfor %}
 </div>
 {% endblock %}
