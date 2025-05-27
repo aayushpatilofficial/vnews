@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- Force desktop layout on all devices -->
+    <!-- Force desktop layout -->
     <meta name="viewport" content="width=1024">
     <meta name="description" content="Your trusted news partner">
     <title>{% block title %}V network{% endblock %}</title>
@@ -84,18 +84,6 @@
         img[alt="v network"] {
             max-height: 70px;
         }
-
-        .social-icons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin: 20px 0;
-        }
-
-        .social-icons a img {
-            width: 50px;
-            height: 50px;
-        }
     </style>
 </head>
 <body>
@@ -118,17 +106,6 @@
                 <a href="{{ url_for('admin_login') }}">Admin</a>
             {% endif %}
         </nav>
-        <div class="social-icons">
-            <a href="https://facebook.com/share/1G7jZPTuty" target="_blank">
-                <img src="https://imagizer.imageshack.com/img923/5426/zDhOyv.png" alt="Facebook">
-            </a>
-            <a href="https://instagram.com/vnewsnetwork?igsh=aHg0bHF0ZDd2MjI4" target="_blank">
-                <img src="https://imagizer.imageshack.com/img924/8207/gVHkYb.png" alt="Instagram">
-            </a>
-            <a href="https://youtube.com/@vnetworkregd1826?si=-BqiRGiXHr0BiHKl" target="_blank">
-                <img src="https://imagizer.imageshack.com/img922/7529/SLiHjx.jpg" alt="YouTube">
-            </a>
-        </div>
     </header>
 
     <main>
@@ -140,4 +117,5 @@
     </footer>
 </body>
 </html>
+
 
