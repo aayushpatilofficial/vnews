@@ -265,3 +265,56 @@ footer {
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
 
+body.dark-mode .card {
+  background-color: #1e1e1e;
+  color: #ddd;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.6);
+}
+
+body.dark-mode .card a {
+  color: #66aaff;
+}
+
+body.dark-mode iframe {
+  background-color: #222;
+  border: none;
+}
+
+body.dark-mode button, 
+body.dark-mode .subscribe-button {
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  box-shadow: none;
+}
+
+body.dark-mode header a,
+body.dark-mode .nav-links a {
+  color: #ccc;
+}
+
+body.dark-mode {
+  background-color: #121212;
+  color: #ddd; /* main text color */
+}
+
+body.dark-mode h1, 
+body.dark-mode h2, 
+body.dark-mode h3 {
+  color: #fff; /* headings brighter */
+}
+
+body.dark-mode a {
+  color: #4ea1ff; /* bright blue links */
+}
+
+body.dark-mode p, 
+body.dark-mode span, 
+body.dark-mode li {
+  color: #bbb; /* lighter text */
+}
+
+body.dark-mode footer, 
+body.dark-mode small {
+  color: #888; /* subdued text */
+}
