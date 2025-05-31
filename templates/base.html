@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- Force desktop layout -->
     <meta name="viewport" content="width=1024">
     <meta name="description" content="Your trusted news partner">
     <title>{% block title %}V network{% endblock %}</title>
@@ -16,6 +15,9 @@
         gtag('config', 'G-FF1FG5MJKY');
     </script>
 
+    <!-- ✅ Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8312851264430395" crossorigin="anonymous"></script>
+
     <!-- ✅ Open Graph Meta Tags -->
     <meta property="og:title" content="V Network – Trusted News Partner in North Karnataka" />
     <meta property="og:description" content="Explore documentaries, news, and talent stories with V Network, established in 2001." />
@@ -24,11 +26,8 @@
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
 
-    <!-- ✅ Fonts and Styles -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-
-    <!-- ✅ Favicon -->
     <link rel="icon" type="image/png" href="https://imagizer.imageshack.com/v2/240x212q70/c/r/924/pHCKQ3.png">
 
     <style>
@@ -89,11 +88,9 @@
             max-height: 70px;
         }
 
-        /* Dark mode styles */
         body.dark-mode {
             background: #121212;
             color: #f0f0f0;
-            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         body.dark-mode header {
@@ -114,7 +111,6 @@
             color: #bbb;
         }
 
-        /* Toggle switch styling */
         .toggle-switch {
             position: relative;
             display: inline-block;
@@ -181,16 +177,55 @@
             {% endif %}
         </nav>
 
-        <!-- Dark mode toggle switch -->
         <label class="toggle-switch" title="Toggle dark mode">
             <input type="checkbox" id="dark-mode-toggle" aria-label="Toggle dark mode">
             <span class="slider"></span>
         </label>
     </header>
 
+    <!-- ✅ Top Ad -->
+    <div style="text-align:center; margin: 15px 0;">
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-8312851264430395"
+            data-ad-slot="1111111111"  <!-- Replace this slot ID -->
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
     <main>
+
+        <!-- ✅ Mid Ad -->
+        <div style="text-align:center; margin: 20px 0;">
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-8312851264430395"
+                data-ad-slot="2222222222"  <!-- Replace this slot ID -->
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
         {% block content %}{% endblock %}
     </main>
+
+    <!-- ✅ Bottom Ad -->
+    <div style="text-align:center; margin: 20px 0;">
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-8312851264430395"
+            data-ad-slot="3333333333"  <!-- Replace this slot ID -->
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
 
     <footer>
         <p>&copy; V NETWORK REGD. All rights reserved.</p>
@@ -198,18 +233,18 @@
 
     <script>
         const toggle = document.getElementById('dark-mode-toggle');
-
-        // Load saved mode from localStorage
         if (localStorage.getItem('darkMode') === 'true') {
             document.body.classList.add('dark-mode');
             toggle.checked = true;
         }
-
         toggle.addEventListener('change', () => {
             document.body.classList.toggle('dark-mode');
             localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
         });
     </script>
+</body>
+</html>
+
 </body>
 </html>
 
