@@ -1,13 +1,27 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.exc import OperationalError
 from datetime import datetime
+import os
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key_here'
+app.secret_key = os.getenv('SECRET_KEY', 'your_secret_key_here')
 
-# PostgreSQL Database Setup
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://aaaa_wpxk_user:elTL77uYi2hzQADlPEm74H8Z8hYV3ABI@dpg-d0pj4cuuk2gs739n8e60-a.oregon-postgres.render.com/aaaa_wpxk'
+# --- PostgreSQL Database Setup ---
+db_url = os.getenv('DATABASE_URL', 'postgresql://aaaa_wpxk_user:elTL77uYi2hzQADlPEm74H8Z8hYV3ABI@dpg-d0pj4cuuk2gs739n8e60-a.oregon-postgres.render.com/aaaa_wpxk')
+
+# Ensure correct prefix for psycopg2
+if db_url.startswith("postgres://"):
+    db_url = db_url.replace("postgres://", "postgresql://", 1)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = db_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# Connection pool settings
+app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
+    "pool_pre_ping": True,
+    "pool_recycle": 300  # 5 minutes
+}
 
 db = SQLAlchemy(app)
 
@@ -26,10 +40,13 @@ class Article(db.Model):
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
 
 # ---------------- ROUTES ----------------
-
 @app.route('/')
 def home():
-    videos = NewsVideo.query.order_by(NewsVideo.timestamp.desc()).all()
+    try:
+        videos = NewsVideo.query.order_by(NewsVideo.timestamp.desc()).all()
+    except OperationalError:
+        db.session.rollback()
+        videos = []
     return render_template('index.html', videos=videos)
 
 @app.route('/about')
@@ -38,13 +55,21 @@ def about():
 
 @app.route('/news')
 def news():
-    videos = NewsVideo.query.order_by(NewsVideo.timestamp.desc()).all()
+    try:
+        videos = NewsVideo.query.order_by(NewsVideo.timestamp.desc()).all()
+    except OperationalError:
+        db.session.rollback()
+        videos = []
     return render_template('news.html', videos=videos)
 
 @app.route('/articles')
 def articles():
-    articles = Article.query.order_by(Article.timestamp.desc()).all()
-    return render_template('articles.html', articles=articles)
+    try:
+        articles_list = Article.query.order_by(Article.timestamp.desc()).all()
+    except OperationalError:
+        db.session.rollback()
+        articles_list = []
+    return render_template('articles.html', articles=articles_list)
 
 @app.route('/contact')
 def contact():
@@ -72,9 +97,14 @@ def admin_login():
 def admin_dashboard():
     if not session.get('admin'):
         return redirect(url_for('admin_login'))
-    videos = NewsVideo.query.order_by(NewsVideo.timestamp.desc()).all()
-    articles = Article.query.order_by(Article.timestamp.desc()).all()
-    return render_template('admin_dashboard.html', videos=videos, articles=articles)
+    try:
+        videos = NewsVideo.query.order_by(NewsVideo.timestamp.desc()).all()
+        articles_list = Article.query.order_by(Article.timestamp.desc()).all()
+    except OperationalError:
+        db.session.rollback()
+        videos = []
+        articles_list = []
+    return render_template('admin_dashboard.html', videos=videos, articles=articles_list)
 
 @app.route('/admin/add_video', methods=['POST'])
 def add_video():
@@ -123,10 +153,7 @@ def logout():
     return redirect(url_for('home'))
 
 # ---------------- MAIN ----------------
-
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
     app.run(debug=True)
-
-
