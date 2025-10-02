@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=1024">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Your trusted news partner">
-    <title>{% block title %}V network{% endblock %}</title>
+    <title>{% block title %}V Network{% endblock %}</title>
 
     <!-- ✅ Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-FF1FG5MJKY"></script>
@@ -26,134 +26,40 @@
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
 
+    <!-- ✅ Fonts & CSS -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="icon" type="image/png" href="https://imagizer.imageshack.com/v2/240x212q70/c/r/924/pHCKQ3.png">
 
+    <!-- ✅ PWA Manifest -->
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+    <meta name="theme-color" content="#2196F3">
+
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: #fff;
-            color: #333;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
+        /* ===== Body & Header ===== */
+        body { font-family: 'Inter', sans-serif; margin:0; padding:0; background:#fff; color:#333; transition: background-color 0.3s, color 0.3s;}
+        header { display:flex; justify-content:space-between; align-items:center; background:#f8f8f8; padding:10px 20px; box-shadow:0 2px 4px rgba(0,0,0,0.1);}
+        .nav-links { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin-top:0;}
+        .nav-links a { color:#333; text-decoration:none; font-weight:500; padding:10px 12px; border-radius:6px; transition:background 0.3s;}
+        .nav-links a:hover { background-color:#eaeaea; }
+        main { padding:20px; }
+        footer { background:#f1f1f1; text-align:center; padding:15px; margin-top:30px; font-size:14px; color:#555;}
+        img[alt="v network"] { max-height:70px; }
 
-        header {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
-            background-color: #f8f8f8;
-            padding: 10px 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
+        /* ===== Dark Mode ===== */
+        body.dark-mode { background:#121212; color:#f0f0f0; }
+        body.dark-mode header { background:#1f1f1f; box-shadow:0 2px 6px rgba(0,0,0,0.8); }
+        body.dark-mode .nav-links a { color:#ccc; }
+        body.dark-mode .nav-links a:hover { background-color:#333; }
+        body.dark-mode footer { background:#1a1a1a; color:#bbb; }
 
-        .nav-links {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 12px;
-            margin-top: 0;
-        }
-
-        .nav-links a {
-            color: #333;
-            text-decoration: none;
-            font-weight: 500;
-            padding: 10px 12px;
-            border-radius: 6px;
-            transition: background 0.3s;
-        }
-
-        .nav-links a:hover {
-            background-color: #eaeaea;
-        }
-
-        main {
-            padding: 20px;
-        }
-
-        footer {
-            background: #f1f1f1;
-            text-align: center;
-            padding: 15px;
-            margin-top: 30px;
-            font-size: 14px;
-            color: #555;
-        }
-
-        img[alt="v network"] {
-            max-height: 70px;
-        }
-
-        body.dark-mode {
-            background: #121212;
-            color: #f0f0f0;
-        }
-
-        body.dark-mode header {
-            background-color: #1f1f1f;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.8);
-        }
-
-        body.dark-mode .nav-links a {
-            color: #ccc;
-        }
-
-        body.dark-mode .nav-links a:hover {
-            background-color: #333;
-        }
-
-        body.dark-mode footer {
-            background: #1a1a1a;
-            color: #bbb;
-        }
-
-        .toggle-switch {
-            position: relative;
-            display: inline-block;
-            width: 48px;
-            height: 24px;
-            margin-left: 20px;
-        }
-
-        .toggle-switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0; left: 0;
-            right: 0; bottom: 0;
-            background-color: #ccc;
-            transition: .4s;
-            border-radius: 24px;
-        }
-
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 18px;
-            width: 18px;
-            left: 3px;
-            bottom: 3px;
-            background-color: white;
-            transition: .4s;
-            border-radius: 50%;
-        }
-
-        input:checked + .slider {
-            background-color: #2196F3;
-        }
-
-        input:checked + .slider:before {
-            transform: translateX(24px);
-        }
+        /* ===== Toggle Switch ===== */
+        .toggle-switch { position:relative; display:inline-block; width:48px; height:24px; margin-left:20px;}
+        .toggle-switch input { opacity:0; width:0; height:0; }
+        .slider { position:absolute; cursor:pointer; top:0; left:0; right:0; bottom:0; background-color:#ccc; transition:.4s; border-radius:24px;}
+        .slider:before { position:absolute; content:""; height:18px; width:18px; left:3px; bottom:3px; background:white; transition:.4s; border-radius:50%; }
+        input:checked + .slider { background-color:#2196F3; }
+        input:checked + .slider:before { transform:translateX(24px); }
     </style>
 </head>
 <body>
@@ -176,7 +82,6 @@
                 <a href="{{ url_for('admin_login') }}">Admin</a>
             {% endif %}
         </nav>
-
         <label class="toggle-switch" title="Toggle dark mode">
             <input type="checkbox" id="dark-mode-toggle" aria-label="Toggle dark mode">
             <span class="slider"></span>
@@ -186,29 +91,24 @@
     <!-- ✅ Top Ad -->
     <div style="text-align:center; margin: 15px 0;">
         <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-8312851264430395"
-            data-ad-slot="1111111111"  <!-- Replace this slot ID -->
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
+             style="display:block"
+             data-ad-client="ca-pub-8312851264430395"
+             data-ad-slot="1111111111"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
     </div>
 
     <main>
-
         <!-- ✅ Mid Ad -->
         <div style="text-align:center; margin: 20px 0;">
             <ins class="adsbygoogle"
-                style="display:block"
-                data-ad-client="ca-pub-8312851264430395"
-                data-ad-slot="2222222222"  <!-- Replace this slot ID -->
-                data-ad-format="auto"
-                data-full-width-responsive="true"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+                 style="display:block"
+                 data-ad-client="ca-pub-8312851264430395"
+                 data-ad-slot="2222222222"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
         </div>
 
         {% block content %}{% endblock %}
@@ -217,20 +117,19 @@
     <!-- ✅ Bottom Ad -->
     <div style="text-align:center; margin: 20px 0;">
         <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-8312851264430395"
-            data-ad-slot="3333333333"  <!-- Replace this slot ID -->
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
+             style="display:block"
+             data-ad-client="ca-pub-8312851264430395"
+             data-ad-slot="3333333333"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
     </div>
 
     <footer>
         <p>&copy; V NETWORK REGD. All rights reserved.</p>
     </footer>
 
+    <!-- ===== Dark Mode Script ===== -->
     <script>
         const toggle = document.getElementById('dark-mode-toggle');
         if (localStorage.getItem('darkMode') === 'true') {
@@ -242,9 +141,15 @@
             localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
         });
     </script>
-</body>
-</html>
+
+    <!-- ===== Service Worker Registration ===== -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('{{ url_for("static", filename="sw.js") }}')
+                .then(() => console.log('Service Worker Registered'))
+                .catch(err => console.log('SW registration failed:', err));
+        }
+    </script>
 
 </body>
 </html>
-
