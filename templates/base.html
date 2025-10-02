@@ -33,7 +33,7 @@
 
     <!-- ✅ PWA Manifest -->
     <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
-    <meta name="theme-color" content="#2196F3">
+    <meta name="theme-color" content="#ff0000">
 
     <style>
         /* ===== Body & Header ===== */
@@ -88,7 +88,7 @@
         </label>
     </header>
 
-    <!-- ✅ Top Ad -->
+    <!-- ===== Ads ===== -->
     <div style="text-align:center; margin: 15px 0;">
         <ins class="adsbygoogle"
              style="display:block"
@@ -100,7 +100,6 @@
     </div>
 
     <main>
-        <!-- ✅ Mid Ad -->
         <div style="text-align:center; margin: 20px 0;">
             <ins class="adsbygoogle"
                  style="display:block"
@@ -114,7 +113,6 @@
         {% block content %}{% endblock %}
     </main>
 
-    <!-- ✅ Bottom Ad -->
     <div style="text-align:center; margin: 20px 0;">
         <ins class="adsbygoogle"
              style="display:block"
@@ -150,6 +148,6 @@
                 .catch(err => console.log('SW registration failed:', err));
         }
     </script>
-
 </body>
 </html>
+
