@@ -159,6 +159,10 @@ def sw():
     """Serve the service worker file"""
     return send_from_directory('static', 'sw.js')
 
+@app.route('/manifest.json')
+def manifest():
+    return send_from_directory('static', 'manifest.json')
+
 # ---------------- MAIN ----------------
 if __name__ == "__main__":
     with app.app_context():
