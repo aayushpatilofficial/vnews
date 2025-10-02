@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+<!-- Add PWA manifest link and theme color in head via base.html if possible -->
 <style>
   body {
     background: #ffffff;
@@ -129,15 +130,12 @@
 <div class="hero-section">
   <h2>Welcome to V Network</h2>
   <div class="hero-cta social-icons">
-    <!-- Facebook -->
     <a href="https://www.facebook.com/share/1G7jZPTuty/" target="_blank" aria-label="Facebook">
       <img src="https://imagizer.imageshack.com/img924/8207/gVHkYb.png" alt="Facebook" class="social-icon">
     </a>
-    <!-- Instagram -->
     <a href="https://www.instagram.com/vnewsnetwork?igsh=aHg0bHF0ZDd2MjI4" target="_blank" aria-label="Instagram">
       <img src="https://imagizer.imageshack.com/img922/7529/SLiHjx.jpg" alt="Instagram" class="social-icon">
     </a>
-    <!-- YouTube -->
     <a href="https://youtube.com/@vnetworkregd1826?sub_confirmation=1" target="_blank" aria-label="YouTube">
       <img src="https://imagizer.imageshack.com/img923/5426/zDhOyv.png" alt="YouTube" class="social-icon">
     </a>
@@ -190,6 +188,13 @@
 
   fetchSubscriberCount();
   setInterval(fetchSubscriberCount, 60000);
+
+  // Register Service Worker for PWA
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js')
+      .then(() => console.log('Service Worker Registered'))
+      .catch(err => console.log('SW registration failed:', err));
+  }
 </script>
 
 <!-- Video Grid -->
