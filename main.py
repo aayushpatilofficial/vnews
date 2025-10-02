@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import OperationalError
 from datetime import datetime
@@ -83,6 +83,7 @@ def privacy():
 def disclaimer():
     return render_template('disclaimer.html')
 
+# ---------------- ADMIN ----------------
 @app.route('/admin', methods=['GET', 'POST'])
 def admin_login():
     if request.method == 'POST':
@@ -151,6 +152,12 @@ def delete_article(article_id):
 def logout():
     session.pop('admin', None)
     return redirect(url_for('home'))
+
+# ---------------- SERVICE WORKER ----------------
+@app.route('/sw.js')
+def sw():
+    """Serve the service worker file"""
+    return send_from_directory('static', 'sw.js')
 
 # ---------------- MAIN ----------------
 if __name__ == "__main__":
